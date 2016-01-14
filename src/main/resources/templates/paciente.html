@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Clinica FPU</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Bootstrap -->
+		<!-- <link href="css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	</head>
+
+	<body>
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<!-- <script src="../js/bootstrap.min.js"></script>	 -->
+		<script src="/js/bootstrap.min.js"></script>		
+		
+		<!-- Inicio Menus Superior -->
+	    <div class="navbar navbar-inverse">
+	      <div class="navbar-inner">
+	        <a class="brand" href="/">Clinica FPU</a>
+	        <ul class="nav">
+	          <li><a href="/">Consultas</a></li>
+	          <li class="active"><a href="paciente.html">Paciente</a></li>
+	          <li><a href="medico.html">Medicos</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	    <!-- Fim Menus Superior -->
+	    
+	    <!-- Inicio Conteudo -->
+	    <div class="container-fluid">	
+	    	<!-- Inicio Formulario -->		
+			<form action="/paciente/save" method="POST" class="form-inline">
+		        
+				<label class="control-label">Nome:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>	
+				<input type="hidden" th:value="${paciente.id}"  name="id"/>
+				<input type="text" th:value="${paciente.nome}" class="span6" placeholder="Nome" name="nome"/>
+				  	
+				<br /><br />
+				<label class="control-label">CPF:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${paciente.cpf}" class="span2" placeholder="000.000.000-00" name="cpf"/>
+				 	
+				<label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;Data Nascimento:</label>
+				<input type="text" th:value="${paciente.dataNasc}" class="span2" placeholder="00/00/0000" name="dataNasc"/>
+				 
+				<br /><br />
+				<label class="control-label">Endereço:&nbsp;&nbsp;</label>
+				<input type="text" th:value="${paciente.endereco}" class="span6" placeholder="Endereço" name="endereco"/>
+				 
+				<br /><br />
+				<label class="control-label">Cidade:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${paciente.cidade}" class="span2" placeholder="Cidade" name="cidade"/>
+				 
+				<label class="control-label">&nbsp;&nbsp;Estado:</label>
+				<input type="text" th:value="${paciente.estado}" class="span1" placeholder="XX" name="estado"/> 
+				
+				<label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;CEP:</label>
+				<input type="text" th:value="${paciente.cep}" class="span2" placeholder="00000-000" name="cep"/>
+				
+				<br /><br /> 
+				<label class="control-label">Telefone:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${paciente.telefone}" class="span2" placeholder="(XX) XXXXX-XXXX" name="telefone"/>
+				
+				<br /><br /> 
+				<label class="control-label">E-mail:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${paciente.email}" class="span6" placeholder="E-mail" name="email"/>
+				 
+				<br /><br />
+				<button type="submit" class="btn btn-default">Enviar</button>
+		    
+		    <!-- Fim Formulario -->
+		    </form>		    
+		    
+		    <br /><br /><br /><br />
+		    
+		    <!-- Inicio tabela Exibicao -->
+		    <table class="table table-striped">
+
+    			<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>Data Nascimento</th>
+					<th>Endereço</th>
+					<th>Cidade</th>
+					<th>Estado</th>
+					<th>Cep</th>
+					<th>Telefone</th>
+					<th>E-mail</th>					
+					<th>Excluir</th>
+					<th>Editar</th>
+				</tr>
+		    
+		    <!-- Inicio tabela Exibicao -->
+		    
+		    	
+		    	<tbody>
+					<tr th:each="paciente:${pacientes}">
+						<td th:text="${paciente.id}"></td>					
+						<td th:text="${paciente.nome}"></td>						
+						<td th:text="${paciente.cpf}"></td>
+						<td th:text="${paciente.dataNasc}"></td>
+						<td th:text="${paciente.endereco}"></td>
+						<td th:text="${paciente.cidade}"></td>
+						<td th:text="${paciente.estado}"></td>
+						<td th:text="${paciente.cep}"></td>
+						<td th:text="${paciente.telefone}"></td>
+						<td th:text="${paciente.email}"></td>
+						<td> <a th:href="@{/paciente/del(id=${paciente.id})}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td> <a th:href="@{/paciente(id=${paciente.id})}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a></td>
+					</tr>
+				</tbody>
+		    </table>
+		<!-- Fim Conteudo -->
+		</div>
+		
+	</body>
+</html>

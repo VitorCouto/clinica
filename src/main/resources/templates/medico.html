@@ -1,0 +1,127 @@
+<html>
+	<head>
+		<title>Clinica FPU</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Bootstrap -->
+		<!-- <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/> -->
+<!-- 		<link href="../static/css/bootstrap.min.css" rel="stylesheet" type="text/css"/> -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	</head>
+
+	<body>
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<!-- <script src="../js/bootstrap.min.js"></script>	 -->
+<!-- 		<script src="../static/js/bootstrap.min.js"></script> -->
+		<script src="/js/bootstrap.min.js"></script>
+		
+		<!-- Inicio Menus Superior -->
+	    <div class="navbar navbar-inverse">
+	      <div class="navbar-inner">
+	        <a class="brand" href="/">Clinica FPU</a>
+	        <ul class="nav">
+	          <li><a href="/">Consultas</a></li>
+	          <li><a href="paciente.html">Paciente</a></li>
+	          <li class="active"><a href="medico.html">Medicos</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	    <!-- Fim Menus Superior -->
+	    
+	    <!-- Inicio Conteudo -->
+	    <div class="container-fluid">
+		    <!-- Inicio Formulario -->
+		    <form action="medico/save" method="post" class="form-inline">
+		    
+		    	<label class="control-label">Nome:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>	
+				<input type="hidden" th:value="${medico.id}"  name="id"/>
+				<input type="text" th:value="${medico.nome}" class="span6" placeholder="Nome" name="nome"/>
+				
+				<br /><br />
+				<label class="control-label">CPF:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.cpf}" class="span2" placeholder="000.000.000-00" name="cpf"/>
+				 		    	
+		    	<br /><br />
+				<label class="control-label">CRM:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.crm}" class="span2" placeholder="000000" name="crm"/>
+				 	
+		    	<label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;Data Nascimento:</label>
+				<input type="text" th:value="${medico.dataNasc}" class="span2" placeholder="00/00/0000" name="dataNasc"/>
+				 
+		    	<br /><br />
+				<label class="control-label">Endereço:&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.endereco}" class="span6" placeholder="Endereço" name="endereco"/>
+				 
+				<br /><br />
+				<label class="control-label">Cidade:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.cidade}" class="span2" placeholder="Cidade" name="cidade"/>
+				 
+				<label class="control-label">&nbsp;&nbsp;Estado:</label>
+				<input type="text" th:value="${medico.estado}" class="span1" placeholder="XX" name="estado"/> 
+				
+		    	<label class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;CEP:</label>
+				<input type="text" th:value="${medico.cep}" class="span2" placeholder="00000-000" name="cep"/>
+				
+		    	<br /><br /> 
+				<label class="control-label">Telefone:&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.telefone}" class="span2" placeholder="(XX) XXXXX-XXXX" name="telefone"/>
+				
+				<br /><br /> 
+				<label class="control-label">E-mail:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.email}" class="span6" placeholder="E-mail" name="email"/>
+				 
+		    	<br /><br />
+				<label class="control-label">Especialidade:&nbsp;&nbsp;</label>
+				<input type="text" th:value="${medico.especialidade}" class="span6" placeholder="Endereço" name="especialidade"/>
+				 		    	
+		    	<br /><br />					
+				<button type="submit" class="btn btn-default">Enviar</button>
+		    <!-- Fim Formulario -->
+		    </form>
+		
+			<br /><br />
+			
+			<table class="table table-striped">
+
+    			<tr>
+					<th>ID</th>
+					<th>Nome</th>
+					<th>CPF</th>
+					<th>CRM</th>
+					<th>Data Nascimento</th>
+					<th>Endereço</th>
+					<th>Cidade</th>
+					<th>Estado</th>
+					<th>Cep</th>
+					<th>Telefone</th>
+					<th>E-mail</th>	
+					<th>Especialidade</th>				
+					<th>Excluir</th>
+					<th>Editar</th>
+				</tr>
+		    
+		    	<!-- Inicio tabela Exibicao -->	    	
+		    	<tbody>
+		    		<tr th:each="medico:${medicos}">
+						<td th:text="${medico.id}"></td>					
+						<td th:text="${medico.nome}"></td>
+						<td th:text="${medico.cpf}"></td>
+						<td th:text="${medico.crm}"></td>
+						<td th:text="${medico.dataNasc}"></td>
+						<td th:text="${medico.endereco}"></td>
+						<td th:text="${medico.cidade}"></td>
+						<td th:text="${medico.estado}"></td>
+						<td th:text="${medico.cep}"></td>
+						<td th:text="${medico.telefone}"></td>
+						<td th:text="${medico.email}"></td>
+						<td th:text="${medico.especialidade}"></td>
+						<td> <a th:href="@{/medico/del(id=${medico.id})}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td> <a th:href="@{/medico(id=${medico.id})}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a></td>
+					</tr>
+		    	</tbody>
+		    	
+	    	</table>
+		<!-- Fim Conteudo -->
+		</div>
+
+	</body>
+</html>

@@ -1,0 +1,97 @@
+<html>
+	<head>
+		<title>Clinica FPU</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Bootstrap -->
+		<!-- <link href="../css/bootstrap.min.css" rel="stylesheet" media="screen"/> -->
+		<link href="/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+	</head>
+
+	<body>
+		<script src="http://code.jquery.com/jquery.js"></script>
+		<!-- <script src="../js/bootstrap.min.js"></script>	 -->
+		<script src="/js/bootstrap.min.js"></script>
+		
+		<!-- Inicio Menus Superior -->
+	    <div class="navbar navbar-inverse">
+	      <div class="navbar-inner">
+	        <a class="brand" href="/">Clinica FPU</a>
+	        <ul class="nav">
+	          <li class="active"><a href="/">Consultas</a></li>
+	          <li><a href="paciente.html">Paciente</a></li>
+	          <li><a href="medico.html">Medicos</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	    <!-- Fim Menus Superior -->
+	    
+	    <!-- Inicio Conteudo -->
+	    <div class="container-fluid">
+	    
+		    <!-- Inicio Formulario -->
+		    <form action="/save" method="post" class="form-inline">
+		    	
+		    	
+		    	<label class="col-md-2 control-label" for="selectbasic">Paciente: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>		    	
+				<input type="hidden" th:value="${consulta.id}"  name="id"/>
+				<select name="pacient" th:field="${consulta.pacient}">
+	                <option th:each="paciente : ${pacientes}" th:value="${paciente.id}" th:text="${paciente.nome}"></option>
+	            </select>
+				
+				<br /><br />
+				<label class="control-label" for="selectbasic">Medico: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>		    	
+				<select name="medic" th:field="${consulta.medic}">
+	                <option th:each="medico : ${medicos}" th:value="${medico.id}" th:text="${medico.nome}"></option>
+	            </select>
+		    					 
+		    	<br /><br />
+				<label class="control-label">Data Consulta:&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${consulta.dataConsulta}" class="span2" placeholder="00/00/0000" name="dataConsulta"/>
+				
+				<br /><br />
+				<label class="control-label">Horario:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+				<input type="text" th:value="${consulta.horarioInicio}" class="span2" placeholder="24:00" name="horarioInicio"/>
+				 		    
+				<br /><br />
+				<label class="control-label">Observação:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label> 		    
+				<textarea class="form-control" id="observacao" th:value="${consulta.observacao}" name="observacao"></textarea>
+				
+					
+		    	<br /><br />					
+				<button type="submit" class="btn btn-default">Enviar</button>
+		    <!-- Fim Formulario -->
+		    </form>
+		
+			<br /><br />
+			
+			<table class="table table-striped">
+    			<tr>
+					<th>ID</th>
+					<th>Data Consulta</th>
+					<th>Horario</th>
+					<th>Medico</th>
+					<th>Paciente</th>
+					<th>Observação</th>
+					<th>Desmarcar</th>
+					<th>Editar</th>
+				</tr>
+		    
+		    	<!-- Inicio tabela Exibicao -->	    	
+		    	<tbody>
+		    		<tr th:each="consulta:${consultas}">
+						<td th:text="${consulta.id}"></td>					
+						<td th:text="${consulta.dataConsulta}"></td>
+						<td th:text="${consulta.horarioInicio}"></td>
+						<td th:text="${consulta.medic.nome}"></td>
+						<td th:text="${consulta.pacient.nome}"></td>
+						<td th:text="${consulta.observacao}"></td>
+						<td> <a th:href="@{/del(id=${consulta.id})}" class="btn btn-danger"><span class="glyphicon glyphicon-remove"></span></a></td>
+						<td> <a th:href="@{/(id=${consulta.id})}" class="btn btn-primary"><span class="glyphicon glyphicon-edit"></span></a></td>
+					</tr>
+		    	</tbody>		    	
+	    	</table>
+		<!-- Fim Conteudo -->
+		</div>
+
+	</body>
+</html>
